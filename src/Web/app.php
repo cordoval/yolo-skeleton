@@ -1,8 +1,5 @@
 <?php
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-
 $container = Yolo\createContainer(
     [
         'debug' => $env,
@@ -14,6 +11,6 @@ $container = Yolo\createContainer(
 
 $app = new Yolo\Application($container);
 
-require __DIR__.'controllers.php';
+require __DIR__.'/controllers.php';
 
 return $app;
