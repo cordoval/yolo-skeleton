@@ -1,0 +1,17 @@
+{
+    "name": "cordoval/yolo-skeleton",
+    "description": "A pre-configured skeleton for the yolo framework",
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=5.3.3",
+        "igorw/yolo": "~42.0@dev",
+        "symfony/console": "~2.3"
+    },
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
