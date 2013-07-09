@@ -8,6 +8,9 @@
         "igorw/yolo": "~42.0@dev",
         "symfony/console": "~2.3"
     },
+    "require-dev": {
+        "phpspec/phpspec": "dev-master"
+    },
     "autoload": {
         "psr-0": { "": "src/" }
     },
