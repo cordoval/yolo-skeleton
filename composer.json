@@ -4,7 +4,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.4.0",
         "igorw/yolo": "~42.0@dev",
         "symfony/console": "~2.3"
     },
