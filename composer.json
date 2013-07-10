@@ -9,7 +9,11 @@
         "symfony/console": "~2.3"
     },
     "require-dev": {
-        "phpspec/phpspec": "dev-master"
+        "phpspec/phpspec": "dev-master",
+        "phpunit/phpunit": "3.7.*",
+        "behat/behat": "2.4.*",
+        "behat/mink": "~1.5",
+        "behat/mink-browserkit-driver": "~1.1"
     },
     "autoload": {
         "psr-0": { "": "src/" }
