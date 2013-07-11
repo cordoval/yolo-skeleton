@@ -2,9 +2,11 @@
 
 class Pimple implements ArrayAccess
 {
+    protected $collection = [];
+
     public function offsetSet($offset, $value)
     {
-
+        $this->collection[$offset] = $value;
     }
 
     public function offsetUnset($offset)
@@ -19,6 +21,6 @@ class Pimple implements ArrayAccess
 
     public function offsetGet($offset)
     {
-
+        return $this->collection[$offset];
     }
 }
