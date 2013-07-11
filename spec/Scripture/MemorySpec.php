@@ -17,5 +17,5 @@ class MemorySpec extends ObjectBehavior
        $this->isTimeToRemember()->shouldReturn(true);
     }
 
-    function
+    //function
 }
