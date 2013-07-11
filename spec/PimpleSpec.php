@@ -8,7 +8,7 @@ use ReflectionFunction;
 
 class PimpleSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    function it_is_initializable_and_implements_array_access()
     {
         $this->shouldHaveType('Pimple');
         $this->shouldImplement('ArrayAccess');
@@ -17,6 +17,7 @@ class PimpleSpec extends ObjectBehavior
     function it_stores_strings()
     {
         $this['param'] = 'value';
+
         $this['param']->shouldReturn('value');
     }
 
@@ -37,6 +38,7 @@ class PimpleSpec extends ObjectBehavior
     function it_executes_with_container_argument_when_value_is_a_factory()
     {
         $this['container'] = function($container) { return $container; };
+
         $this->executeFactory('container')->shouldReturn($this);
     }
 
