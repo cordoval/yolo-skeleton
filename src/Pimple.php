@@ -16,7 +16,7 @@ class Pimple implements ArrayAccess
 
     public function offsetExists($offset)
     {
-        throw new \Exception('Iam invoked with '.$offset);
+        return isset($this->collection[$offset]);
     }
 
     public function offsetGet($offset)
