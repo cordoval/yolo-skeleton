@@ -41,7 +41,7 @@ class PimpleSpec extends ObjectBehavior
         $this->offsetGet('container')->shouldReturn($this);
     }
 
-    public function it_responds_to_isset()
+    function it_responds_to_isset()
     {
         $this['param'] = 'value';
         $this['service'] = function () { return new \SplObjectStorage(); };
