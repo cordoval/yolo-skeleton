@@ -10,7 +10,6 @@ class PimpleSpec extends ObjectBehavior
 {
     function it_is_initializable_and_implements_array_access()
     {
-        $this->shouldHaveType('Pimple');
         $this->shouldImplement('ArrayAccess');
     }
 
@@ -25,21 +24,22 @@ class PimpleSpec extends ObjectBehavior
     {
         $this['service'] = function() { return new \SplObjectStorage(); };
 
-        $this->trueOffsetGet('service')->shouldHaveType('SplObjectStorage');
+        $this->offsetGet('service')->shouldHaveType('SplObjectStorage');
     }
 
     function it_nests_an_offsetGet_method_to_avoid_collisions_with_PHPSpec()
     {
         $this['service'] = function() { return new \SplObjectStorage(); };
 
-        $this->offsetGet('service')->shouldBeLike($this->trueOffsetGet('service'));
+        $this->offsetGet('service')->shouldBeAnInstanceOf('SplObjectStorage');
+        $this->offsetGet('service')->shouldBeLike(new \SplObjectStorage());
     }
 
     function it_executes_with_container_argument_when_value_is_a_factory()
     {
         $this['container'] = function($container) { return $container; };
 
-        $this->executeFactory('container')->shouldReturn($this);
+        $this->offsetGet('container')->shouldReturn($this);
     }
 
     public function it_responds_to_isset()

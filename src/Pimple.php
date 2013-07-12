@@ -21,20 +21,10 @@ class Pimple implements ArrayAccess
 
     public function offsetGet($offset)
     {
-        return $this->trueOffsetGet($offset);
-    }
-
-    public function trueOffsetGet($offset)
-    {
         if (is_object($this->collection[$offset]) && method_exists($this->collection[$offset], '__invoke')) {
-            return $this->executeFactory($offset);
+            return $this->collection[$offset]($this);
         }
 
         return $this->collection[$offset];
-    }
-
-    public function executeFactory($offset)
-    {
-        return $this->collection[$offset]($this);
     }
 }
