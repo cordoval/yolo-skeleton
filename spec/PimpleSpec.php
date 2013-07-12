@@ -123,21 +123,52 @@ class PimpleSpec extends ObjectBehavior
 
     function it_can_extend_values()
     {
-        $this['service'] = $definition = function() { return 'foo'; };
-        $this->raw('service')->shouldBe($definition);
+        $this['shared_service'] = $this->share(function() { return new \SplObjectStorage(); });
+        $value = 123;
+        $assignmentDecorator = function($sharedService) use ($value) {
+            $sharedService->value = $value;
+
+            return $sharedService;
+        };
+        $this->extend('shared_service', $assignmentDecorator);
+
+        $this->offsetGet('shared_service')->shouldHaveType(get_class($this->offsetGet('shared_service')));
+        $this->offsetGet('shared_service')->value->shouldBe($value);
+        $this->offsetGet('shared_service')->value->shouldBe($this->offsetGet('shared_service')->value);
+        $this->offsetGet('shared_service')->shouldBe($this->offsetGet('shared_service'));
     }
 
-    public function getMatchers()
+    function it_can_list_all_keys_present()
     {
-        return [
-            'beAClosure' => function($subject, $closure) {
-                $rf = new ReflectionFunction($closure);
-                $result = call_user_func($closure) === call_user_func($subject);
-                return $rf->isClosure() && $result;
-            },
-            'returnWhenInvokedWith' => function($subject, array $resultAndArgument) {
-                return $resultAndArgument[0] === call_user_func($subject, $resultAndArgument[1]);
-            }
-        ];
+        $this['foo'] = 5;
+        $this['bar'] = 7;
+        $this->keys()->shouldReturn(['foo', 'bar']);
+    }
+
+    function it_checks_for_valid_key_when_extending()
+    {
+        $exception = new \InvalidArgumentException('Identifier "foo" is not defined.');
+        $this->shouldThrow($exception)->duringExtend('foo', function() {});
+    }
+
+    function it_invokes_factory_when_value_is_an_invokable_object()
+    {
+        $this['invokable'] = new Invokable();
+        $this->offsetGet('invokable')->shouldReturn('I was invoked');
+    }
+
+    function it_treats_non_invokable_object_as_a_parameter()
+    {
+        $objectParameter = new \StdClass();
+        $this['non_invokable'] = $objectParameter;
+        $this->offsetGet('non_invokable')->shouldReturn($objectParameter);
+    }
+}
+
+class Invokable
+{
+    function __invoke()
+    {
+        return 'I was invoked';
     }
 }

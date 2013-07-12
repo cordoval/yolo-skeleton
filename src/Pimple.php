@@ -51,4 +51,14 @@ class Pimple implements ArrayAccess
     {
         // TODO: write logic here
     }
+
+    public function extend($argument1, $argument2)
+    {
+        // TODO: write logic here
+    }
+
+    public function keys()
+    {
+        // TODO: write logic here
+    }
 }
