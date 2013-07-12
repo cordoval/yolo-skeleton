@@ -11,7 +11,7 @@ class Pimple implements ArrayAccess
 
     public function offsetUnset($offset)
     {
-
+        unset($this->collection[$offset]);
     }
 
     public function offsetExists($offset)
@@ -35,5 +35,20 @@ class Pimple implements ArrayAccess
     public function __construct(array $values = array())
     {
         $this->collection = $values;
+    }
+
+    public function share(Closure $value)
+    {
+
+    }
+
+    public function protect($argument1)
+    {
+        // TODO: write logic here
+    }
+
+    public function raw($argument1)
+    {
+        // TODO: write logic here
     }
 }
