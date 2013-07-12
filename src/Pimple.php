@@ -27,4 +27,9 @@ class Pimple implements ArrayAccess
 
         return $this->collection[$offset];
     }
+
+    public function __construct(array $values = array())
+    {
+        $this->collection = $values;
+    }
 }

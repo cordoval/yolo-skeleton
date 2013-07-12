@@ -54,7 +54,13 @@ class PimpleSpec extends ObjectBehavior
         $this->shouldNotHaveKey('non_existent');
     }
 
-    public function getMatchers()
+    function it_takes_key_value_pairs_via_constructor()
+    {
+        $this->beConstructedWith(['param' => 'value']);
+        $this->offsetGet('param')->shouldReturn('value');
+    }
+
+    function getMatchers()
     {
         return [
             'beAClosure' => function($subject, $closure) {
