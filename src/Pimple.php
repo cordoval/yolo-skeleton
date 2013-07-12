@@ -21,6 +21,10 @@ class Pimple implements ArrayAccess
 
     public function offsetGet($offset)
     {
+        if (!$this->offsetExists($offset)) {
+            throw new \InvalidArgumentException('Identifier "foo" is not defined.');
+        }
+
         if (is_object($this->collection[$offset]) && method_exists($this->collection[$offset], '__invoke')) {
             return $this->collection[$offset]($this);
         }

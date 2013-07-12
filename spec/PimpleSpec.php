@@ -60,6 +60,13 @@ class PimpleSpec extends ObjectBehavior
         $this->offsetGet('param')->shouldReturn('value');
     }
 
+    function it_tests_key_is_present()
+    {
+        $this->shouldThrow(new \InvalidArgumentException('Identifier "foo" is not defined.'))
+            ->duringOffsetGet('foo')
+        ;
+    }
+
     function getMatchers()
     {
         return [
