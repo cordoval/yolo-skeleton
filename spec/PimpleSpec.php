@@ -30,8 +30,9 @@ class PimpleSpec extends ObjectBehavior
     {
         $this['service'] = function() { return new \SplObjectStorage(); };
 
+        $differentInstance = new \SplObjectStorage();
         $this->offsetGet('service')->shouldBeLike(new \SplObjectStorage());
-        $this->offsetGet('service')->shouldNotBe(new \SplObjectStorage());
+        $this->offsetGet('service')->shouldNotBe($differentInstance);
     }
 
     function it_executes_with_container_argument_when_value_is_a_factory()
@@ -85,7 +86,6 @@ class PimpleSpec extends ObjectBehavior
     {
         $this['shared_service'] = $this->share(function() { return new \SplObjectStorage(); });
         $service = $this->offsetGet('shared_service');
-        $this->offsetGet('shared_service')->shouldNotBe(null);
         $this->offsetGet('shared_service')->shouldBe($service);
     }
 
